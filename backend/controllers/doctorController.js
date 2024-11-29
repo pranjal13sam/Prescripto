@@ -66,8 +66,6 @@ const loginDoctor=async(req,res)=>{
     }catch(error){
         console.log(error)
         res.json({success:false,message:error.message})
-
-
     }
 
 }
