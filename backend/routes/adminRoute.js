@@ -2,7 +2,7 @@ import express from "express";
 import {addDoctor,adminDashboard,allDoctors,appointmentCancel,appointmentsAdmin,loginAdmin} from '../controllers/adminController.js'
 import upload from "../middlewares/multer.js";
 import authAdmin from "../middlewares/authAdmin.js";
-import { changeAvailability } from "../controllers/doctorcontroller.js";
+import { changeAvailability } from "../controllers/doctorController.js";
 
 //creating a route
 
