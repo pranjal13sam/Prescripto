@@ -1,6 +1,6 @@
 //api logic for uesr register,login,logout,getprofile,update-profile,payment-gateway,also everything about appointments:
 import validator from "validator"
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import userModel from "../models/userModel.js"
 import jwt from 'jsonwebtoken'
 import authUser from "../middlewares/authUser.js"
