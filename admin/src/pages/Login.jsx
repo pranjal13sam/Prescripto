@@ -3,11 +3,15 @@ import { assets } from '../assets/assets'
 import { AdminContext } from '../context/AdminContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { DoctorContext } from '../context/DoctorContext'
+import {useNavigate} from 'react-router-dom'
 
 const Login = () => {
     const [state, setState] = useState('Admin')
 
-    const { setAToken, backendUrl } = useContext(AdminContext)
+    const { setAToken, backendUrl} = useContext(AdminContext)
+    const {setDToken}=useContext(DoctorContext)
+    const navigate=useNavigate()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -27,12 +31,24 @@ const Login = () => {
                     //before we will store in the localstorage also so that when we refresh the page, we are logged in 
                     localStorage.setItem('aToken', data.token)
                     setAToken(data.token)
+                    navigate('/admin-dashboard')
+                    
 
                 }else{
                     toast.error(data.message)
                 }
-            } else {
+            } else {//state is doctor:
+                const{data}=await axios.post(backendUrl+'/api/doctor/login',{email,password})
+                if (data.success) {
+                    //before we will store in the localstorage also so that when we refresh the page, we are logged in 
+                    localStorage.setItem('dToken', data.token)
+                    setDToken(data.token)
+                    navigate('/doctor-dashboard')
+                    console.log(data.token)
 
+                }else{
+                    toast.error(data.message)
+                }
             }
         }
         catch (error) {
